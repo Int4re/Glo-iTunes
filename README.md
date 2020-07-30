@@ -1,2 +1,2 @@
 # Glo-iTunes
- Media Player
+The workshop of the glo academy for JS
