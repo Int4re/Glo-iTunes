@@ -1,5 +1,7 @@
+import { addZero } from './supScript.js';
+
 export const videoPlayerInit = () => {
-    const videoPlayer= document.querySelector('.video-player');
+    const videoPlayer = document.querySelector('.video-player');
     const videoButtonPlay = document.querySelector('.video-button__play');
     const videoButtonStop = document.querySelector('.video-button__stop');
     const videoProgress = document.querySelector('.video-progress');
@@ -30,8 +32,6 @@ export const videoPlayerInit = () => {
         videoPlayer.currentTime = 0;
         toggleIcon();
     };
-
-    const addZero = (num) => num < 10 ? `0${num}` : num;
 
     videoPlayer.addEventListener('click', togglePlay);
     videoButtonPlay.addEventListener('click', togglePlay);
