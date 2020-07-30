@@ -1,6 +1,6 @@
-import { addZero } from './supScript.js';
+import addZero from './supScript.js';
 
-export const audioPlayerInit = () => {
+export default () => {
   const audio = document.querySelector('.audio');
   const audioImg = document.querySelector('.audio-img');
   const audioHeader = document.querySelector('.audio-header');
@@ -17,22 +17,22 @@ export const audioPlayerInit = () => {
   let trackIndex = 0;
 
   const loadTrack = () => {
-      const isPlayed = audioPlayer.paused;
-      const track = playlist[trackIndex];
-      audioImg.src = `./audio/${track}.jpg`;
-      audioHeader.textContent = track.toUpperCase();
-      audioPlayer.src = `./audio/${track}.mp3`;
+    const isPlayed = audioPlayer.paused;
+    const track = playlist[trackIndex];
+    audioImg.src = `./audio/${track}.jpg`;
+    audioHeader.textContent = track.toUpperCase();
+    audioPlayer.src = `./audio/${track}.mp3`;
 
-      if (isPlayed) {
-          audioPlayer.pause();
-      } else {
-          audioPlayer.play();
-      }
+    if (isPlayed) {
+      audioPlayer.pause();
+    } else {
+      audioPlayer.play();
+    }
   };
 
   const prevTrack = () => {
-    if(trackIndex !== 0) {
-      trackIndex--;
+    if (trackIndex !== 0) {
+      trackIndex -= 1;
     } else {
       trackIndex = playlist.length - 1;
     }
@@ -43,65 +43,63 @@ export const audioPlayerInit = () => {
     if (trackIndex === playlist.length - 1) {
       trackIndex = 0;
     } else {
-      trackIndex ++;
+      trackIndex += 1;
     }
     loadTrack();
   };
 
-  audioNavigation.addEventListener('click', event => {
-      const target = event.target;
+  audioNavigation.addEventListener('click', (event) => {
+    const { target } = event;
 
-      if(target.classList.contains('audio-button__play')) {
-          audio.classList.toggle('play');
-          audioButtonPlay.classList.toggle('fa-play');
-          audioButtonPlay.classList.toggle('fa-pause');
+    if (target.classList.contains('audio-button__play')) {
+      audio.classList.toggle('play');
+      audioButtonPlay.classList.toggle('fa-play');
+      audioButtonPlay.classList.toggle('fa-pause');
 
-          if(audioPlayer.paused) {
-            audioPlayer.play();
-          } else {
-            audioPlayer.pause();
-          }
-          const track = playlist[trackIndex];
-          audioHeader.textContent = track.toUpperCase();
-
+      if (audioPlayer.paused) {
+        audioPlayer.play();
+      } else {
+        audioPlayer.pause();
       }
+      const track = playlist[trackIndex];
+      audioHeader.textContent = track.toUpperCase();
+    }
 
-      if (target.classList.contains('audio-button__prev')) {
-          prevTrack();
-      }
+    if (target.classList.contains('audio-button__prev')) {
+      prevTrack();
+    }
 
-      if (target.classList.contains('audio-button__next')) {
-         nextTrack();
-      }
+    if (target.classList.contains('audio-button__next')) {
+      nextTrack();
+    }
   });
 
   audioPlayer.addEventListener('ended', () => {
-      nextTrack();
-      audioPlayer.play();
+    nextTrack();
+    audioPlayer.play();
   });
 
-    audioPlayer.addEventListener('timeupdate', () => {
-        const duration = audioPlayer.duration;
-        const currentTime = audioPlayer.currentTime;
-        const progress = (currentTime / duration) * 100;
+  audioPlayer.addEventListener('timeupdate', () => {
+    const { duration } = audioPlayer;
+    const { currentTime } = audioPlayer;
+    const progress = (currentTime / duration) * 100;
 
-        audioProgressTiming.style.width = progress + '%';
+    audioProgressTiming.style.width = `${progress}%`;
 
-        const minutesPassed = Math.floor(currentTime / 60) || '0';
-        const secondsPassed = Math.floor(currentTime % 60) || '0';
+    const minutesPassed = Math.floor(currentTime / 60) || '0';
+    const secondsPassed = Math.floor(currentTime % 60) || '0';
 
-        const minutesTotal = Math.floor(duration / 60) || '0';
-        const secondsTotal = Math.floor(duration % 60) || '0';
+    const minutesTotal = Math.floor(duration / 60) || '0';
+    const secondsTotal = Math.floor(duration % 60) || '0';
 
-        audioTimePassed.textContent = `${addZero(minutesPassed)}:${addZero(secondsPassed)}`;
-        audioTimeTotal.textContent = `${addZero(minutesTotal)}:${addZero(secondsTotal)}`;
-    });
+    audioTimePassed.textContent = `${addZero(minutesPassed)}:${addZero(secondsPassed)}`;
+    audioTimeTotal.textContent = `${addZero(minutesTotal)}:${addZero(secondsTotal)}`;
+  });
 
-    audioProgress.addEventListener('click', event => {
-        const x = event.offsetX;
-        const allWidth = audioProgress.clientWidth;
-        const progress = (x / allWidth) * audioPlayer.duration;
-        audioPlayer.currentTime = progress;
-    });
-
+  audioProgress.addEventListener('click', (event) => {
+    const x = event.offsetX;
+    const allWidth = audioProgress.clientWidth;
+    const progress = (x / allWidth) * audioPlayer.duration;
+    audioPlayer.currentTime = progress;
+  });
 };
