@@ -1,6 +1,6 @@
 import addZero from './supScript.js';
 
-export const videoPlayerInit = () => {
+const videoPlayerInit = () => {
   const videoPlayer = document.querySelector('.video-player');
   const videoButtonPlay = document.querySelector('.video-button__play');
   const videoButtonStop = document.querySelector('.video-button__stop');

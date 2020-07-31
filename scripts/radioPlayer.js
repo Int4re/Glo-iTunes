@@ -1,4 +1,4 @@
-export const radioPlayerInit = () => {
+const radioPlayerInit = () => {
   const radio = document.querySelector('.radio');
   const radioCoverImg = document.querySelector('.radio-cover__img');
   const radioHeaderBig = document.querySelector('.radio-header__big');
@@ -56,4 +56,5 @@ export const radioPlayerInit = () => {
     changeIconPlay();
   };
 };
+
 export default radioPlayerInit;
