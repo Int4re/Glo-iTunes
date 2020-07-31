@@ -1,6 +1,6 @@
 import addZero from './supScript.js';
 
-export default () => {
+const AudioPlayerInit = () => {
   const audio = document.querySelector('.audio');
   const audioImg = document.querySelector('.audio-img');
   const audioHeader = document.querySelector('.audio-header');
@@ -102,4 +102,15 @@ export default () => {
     const progress = (x / allWidth) * audioPlayer.duration;
     audioPlayer.currentTime = progress;
   });
+
+  AudioPlayerInit.stop = () => {
+    if (!audioPlayer.paused) {
+      audioPlayer.pause();
+      audio.classList.remove('play');
+      audioButtonPlay.classList.remove('fa-pause');
+      audioButtonPlay.classList.add('fa-play');
+    }
+  };
 };
+
+export default AudioPlayerInit;

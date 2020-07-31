@@ -1,6 +1,6 @@
 import addZero from './supScript.js';
 
-export default () => {
+export const videoPlayerInit = () => {
   const videoPlayer = document.querySelector('.video-player');
   const videoButtonPlay = document.querySelector('.video-button__play');
   const videoButtonStop = document.querySelector('.video-button__stop');
@@ -63,4 +63,12 @@ export default () => {
 
     videoPlayer.currentTime = (value * duration) / 100;
   });
+
+  videoPlayerInit.stop = () => {
+    if (!videoPlayer.paused) {
+      stopPlay();
+    }
+  };
 };
+
+export default videoPlayerInit;
