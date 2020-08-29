@@ -1,1 +1,1 @@
-Музыкальный сервис "ЯTunes" на JavaScript. Доступен по адресу https://Esaal.github.io/Glo-iTunes/.
+Музыкальный сервис "ЯTunes" на JavaScript. Доступен по адресу https://int4re.github.io/Glo-iTunes/.
